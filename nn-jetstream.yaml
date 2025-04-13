@@ -1,0 +1,14 @@
+name: nn-jetstream
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - cudatoolkit
+  - ffmpeg
+
+prefix: /home/exouser/miniforge3/envs/nn-jetstream
+
+# conda create -n nn-jetstream -f nn-jetstream.yaml
+# conda activate nn-jetstream
+# pip install -r requirements-jetstream.txt
