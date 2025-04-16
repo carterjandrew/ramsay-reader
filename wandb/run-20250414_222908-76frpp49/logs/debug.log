@@ -1,0 +1,24 @@
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_setup.py:_flush():67] Current SDK version is 0.19.9
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_setup.py:_flush():67] Configure stats pid to 9716
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_setup.py:_flush():67] Loading settings from /home/carter/.config/wandb/settings
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_setup.py:_flush():67] Loading settings from /home/carter/ramsay-reader/wandb/settings
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_init.py:setup_run_log_directory():662] Logging user logs to /home/carter/ramsay-reader/wandb/run-20250414_222908-76frpp49/logs/debug.log
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_init.py:setup_run_log_directory():663] Logging internal logs to /home/carter/ramsay-reader/wandb/run-20250414_222908-76frpp49/logs/debug-internal.log
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_init.py:init():781] calling init triggers
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_init.py:init():786] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_init.py:init():809] starting backend
+2025-04-14 22:29:08,635 INFO    MainThread:9716 [wandb_init.py:init():813] sending inform_init request
+2025-04-14 22:29:08,637 INFO    MainThread:9716 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-04-14 22:29:08,637 INFO    MainThread:9716 [wandb_init.py:init():823] backend started and connected
+2025-04-14 22:29:08,638 INFO    MainThread:9716 [wandb_init.py:init():915] updated telemetry
+2025-04-14 22:29:08,641 INFO    MainThread:9716 [wandb_init.py:init():939] communicating run to backend with 90.0 second timeout
+2025-04-14 22:29:09,060 INFO    MainThread:9716 [wandb_init.py:init():1014] starting run threads in backend
+2025-04-14 22:29:09,210 INFO    MainThread:9716 [wandb_run.py:_console_start():2454] atexit reg
+2025-04-14 22:29:09,210 INFO    MainThread:9716 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-04-14 22:29:09,210 INFO    MainThread:9716 [wandb_run.py:_redirect():2371] Wrapping output streams.
+2025-04-14 22:29:09,210 INFO    MainThread:9716 [wandb_run.py:_redirect():2394] Redirects installed.
+2025-04-14 22:29:09,211 INFO    MainThread:9716 [wandb_init.py:init():1056] run started, returning control to user process
+2025-04-14 22:29:09,211 INFO    MainThread:9716 [wandb_run.py:_config_callback():1327] config_cb None None {'epochs': 1229, 'learning_rate': 1e-05, 'num_warmup_updates': 190, 'batch_size_per_gpu': 100, 'batch_size_type': 'frame', 'max_samples': 64, 'grad_accumulation_steps': 1, 'max_grad_norm': 1.0, 'noise_scheduler': None, 'gpus': 1}
+2025-04-14 22:29:12,330 INFO    MsgRouterThr:9716 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 1 handles.

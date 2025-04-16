@@ -1,0 +1,14 @@
+Using logger: wandb
+Loading dataset ...
+Download Vocos from huggingface charactr/vocos-mel-24khz
+Sorting with sampler... if slow, check whether dataset is provided with duration: 100%|██████████| 3812/3812 [00:00<00:00, 2740134.85it/s]
+Creating dynamic batches with 100 audio frames per gpu: 100%|██████████| 3812/3812 [00:00<00:00, 3459257.22it/s]
+Traceback (most recent call last):
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py", line 214, in <module>
+    main()
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py", line 207, in main
+    trainer.train(
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/model/trainer.py", line 332, in train
+    skipped_epoch = int(start_step // orig_epoch_step)
+                        ~~~~~~~~~~~^^~~~~~~~~~~~~~~~~
+ZeroDivisionError: integer division or modulo by zero

@@ -1,0 +1,43 @@
+Using logger: wandb
+Loading dataset ...
+Download Vocos from huggingface charactr/vocos-mel-24khz
+Sorting with sampler... if slow, check whether dataset is provided with duration: 100%|██████████| 3812/3812 [00:00<00:00, 2948310.32it/s]
+Creating dynamic batches with 1330 audio frames per gpu: 100%|██████████| 3812/3812 [00:00<00:00, 2393874.36it/s]
+Epoch 1/1229:   0%|          | 0/1180 [00:00<?, ?update/s]Traceback (most recent call last):
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py", line 214, in <module>
+    main()
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py", line 207, in main
+    trainer.train(
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/model/trainer.py", line 378, in train
+    self.optimizer.step()
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/lr_scheduler.py", line 140, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/accelerate/optimizer.py", line 165, in step
+    self.scaler.step(self.optimizer, closure)
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/amp/grad_scaler.py", line 457, in step
+    retval = self._maybe_opt_step(optimizer, optimizer_state, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/amp/grad_scaler.py", line 352, in _maybe_opt_step
+    retval = optimizer.step(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/accelerate/optimizer.py", line 210, in patched_step
+    return method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/optimizer.py", line 493, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/optimizer.py", line 91, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/adamw.py", line 243, in step
+    adamw(
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/optimizer.py", line 154, in maybe_fallback
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/adamw.py", line 875, in adamw
+    func(
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/optim/adamw.py", line 699, in _multi_tensor_adamw
+    exp_avg_sq_sqrt = torch._foreach_sqrt(device_exp_avg_sqs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 24.00 MiB. GPU 0 has a total capacity of 7.60 GiB of which 11.56 MiB is free. Including non-PyTorch memory, this process has 7.44 GiB memory in use. Of the allocated memory 7.20 GiB is allocated by PyTorch, and 111.24 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
