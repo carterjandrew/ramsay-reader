@@ -20,7 +20,7 @@ class FF5Formatter:
         for i, row in tqdm(self.df.iterrows()):
             filename = f'{i}.wav'
             filepath = os.path.join(self.wavs_dir, filename)
-            filepaths.append(f'wavs/{filename}')
+            filepaths.append(f'{filename}')
             soundfile.write(
                 filepath,
                 row['audio']['array'],
