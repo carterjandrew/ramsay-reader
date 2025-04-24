@@ -2,3 +2,4 @@ data
 dataset
 __pycache__
 wandb
+finetuned_10000_f5_v1

@@ -1,3 +1,6 @@
 [submodule "F5-TTS"]
 	path = F5-TTS
 	url = https://github.com/SWivid/F5-TTS.git
+[submodule "finetuned_10000_f5_v1"]
+	path = finetuned_10000_f5_v1
+	url = https://huggingface.co/the-ramsay-experience/finetuned_10000_f5_v1
