@@ -1,0 +1,7 @@
+model = "F5TTS_Base"
+ref_audio = "/home/carter/ramsay-reader/data/ref/1.wav"
+ref_text = "/home/carter/ramsay-reader/data/ref/1.txt"
+gen_text = "Hello world"
+remove_silence = false
+output_dir = "./data/ramsay/outputs/"
+output_file = "1.wav"
