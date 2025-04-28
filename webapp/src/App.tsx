@@ -1,15 +1,24 @@
-import { Button, Center, Flex, Heading, Image, Input, Slider, Text } from "@chakra-ui/react"
+import { Box, Button, Center, Flex, Heading, Image, Input, Slider, Spinner, Text, Textarea } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
 import { FaFastBackward, FaFastForward, FaGithub, FaPlay, FaPlayCircle } from "react-icons/fa"
 import { LuChefHat } from "react-icons/lu"
+import JobCard from "./components/jobCard"
+
+export type Job = {
+	text: string,
+	status: {
+		status: string,
+		error?: string
+	}
+	id?: string,
+}
 
 export default function Page() {
 	const [boxHeight, setBoxHeight] = useState<number>(0)
-
-	const [generating, setGenerating] = useState(false)
-	const [ws, setWs] = useState<WebSocket>()
-	const audioCtxRef = useRef(null)
-	const bufferQueueRef = useRef(Promise.resolve())
+	const [inputText, setInputText] = useState('')
+	const [job, setJob] = useState<Job>()
+	const [results, setResults] = useState<Job[]>([])
+	const intervalRef = useRef<number>(null)
 
 	function handleBoxRef(ref: HTMLDivElement) {
 		if (!ref) return
@@ -17,67 +26,97 @@ export default function Page() {
 	}
 
 	useEffect(() => {
-		if (!generating) return
-		// Audio context init
-		audioCtxRef.current = new (window.AudioContext)()
-
-		const socket = new WebSocket('ws://localhost:8765/ws')
-		socket.binaryType = 'arraybuffer'
-
-		socket.onopen = () => {
-			console.log("Websocket connected")
-			socket.send("Hello, this is a real-time TTS test!")
-		}
-
-		socket.onmessage = (event) => {
-			console.log("Recived messsage from server")
-			if (typeof event.data === 'string' && event.data === 'END') {
-				if (event.data === 'END')
-					console.log('Stream ended')
-				return
+		console.log(job)
+		async function handleJobChange() {
+			if (!job) return
+			if (job.status.status === 'creating') {
+				const response = await fetch('http://localhost:5000/submit', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						text: job.text
+					})
+				})
+				const id = (await response.json())[0].job_id
+				setJob({
+					...job,
+					id: id,
+					status: {
+						status: 'queued'
+					}
+				})
 			}
-			playChunk(new Float32Array(event.data))
+			if (job.status.status === 'completed') {
+				setResults([
+					...results,
+					job
+				])
+				setJob(undefined)
+			}
 		}
-		socket.onerror = (err) => console.error("WS error", err);
-		socket.onclose = () => {
-			console.log("WebSocket closed")
-			setGenerating(false)
-		}
+		handleJobChange()
+	}, [job])
 
-		setWs(socket);
-
-		return () => {
-			socket.close();
-			audioCtxRef.current!.close();
-		};
-	}, [generating])
-
-	function playChunk(float32Array: Float32Array) {
-		if (!audioCtxRef.current) return
-		const audioCtx = audioCtxRef.current;
-		// create a buffer of 1 channel
-		const buf = audioCtx.createBuffer(
-			1,
-			float32Array.length,
-			24000
-		);
-		buf.copyToChannel(float32Array, 0);
-
-		const source = audioCtx.createBufferSource();
-		source.buffer = buf;
-		source.connect(audioCtx.destination);
-
-		// ensure chunks play in sequence
-		bufferQueueRef.current = bufferQueueRef.current.then(() => {
-			return new Promise((resolve) => {
-				source.onended = resolve;
-				source.start();
-			});
-		});
+	async function pollJobStatus() {
+		if (!job || !job.id) return
+		const response = await fetch(
+			`http://localhost:5000/status/${job?.id}`
+		)
+		const status = (await response.json())
+		setJob({
+			...job,
+			status: status
+		})
 	}
 
-	const sendText = (text) => {
-		if (ws && ws.readyState === WebSocket.OPEN) ws.send(text);
+	useEffect(() => {
+		if (job && job.status.status !== 'completed') {
+			intervalRef.current = setInterval(pollJobStatus, 5000)
+		} else {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current)
+				intervalRef.current = null
+			}
+		}
+		return () => {
+			if (!intervalRef.current) return
+			clearInterval(intervalRef.current)
+			intervalRef.current = null
+		}
+
+	}, [job])
+
+	function renderButton() {
+		if (!job) return (
+			<Button
+				onClick={() => {
+					if (inputText.length < 1 || inputText.length > 200) return
+					setJob({
+						status: {
+							status: 'creating',
+						},
+						text: inputText
+					})
+				}}
+			>
+				<LuChefHat />
+				Start Cooking
+			</Button>
+		)
+		if (job.status.status !== 'completed') return (
+			<Button >
+				<Spinner />
+				{job.status.status} request
+			</Button >
+		)
+		if (job.status.status === 'completed') return (
+			<Button >
+				<Spinner />
+				Job completed, downloading audio
+			</Button >
+		)
 	}
 
 	return (
@@ -107,12 +146,14 @@ export default function Page() {
 					<FaGithub />
 				</Flex>
 			</Flex>
-			<Center
+			<Flex
 				flex={1}
 				w='100%'
-				pos='relative'
 				flexDir='column'
+				overflowY='scroll'
+				alignItems='center'
 			>
+				<Box h='20vh' />
 				<Image
 					src='ramsay.png'
 					objectFit='contain'
@@ -134,37 +175,29 @@ export default function Page() {
 					bg='bg'
 					ref={handleBoxRef}
 				>
-					<Text> "Thow it in a mixer idiot sandwiwich" </Text>
-					<Center flexDir='row' gap={2}>
-						<FaFastBackward />
-						<FaPlayCircle size={40} />
-						<FaFastForward />
-					</Center>
-					<Slider.Root w='70%'>
-						<Slider.Control>
-							<Slider.Track>
-								<Slider.Range />
-							</Slider.Track>
-							<Slider.Thumbs />
-						</Slider.Control>
-					</Slider.Root>
-					<Flex flexDir='row' gap={2}>
-						<Input
-							flex={1}
-							placeholder='URL to Recipe'
-						/>
-						<Button
-							onClick={() => {
-								setGenerating(true)
-								sendText("Hello you silly person")
-							}}
-						>
-							<LuChefHat />
-							Start Cooking
-						</Button>
-					</Flex>
+					<Textarea
+						fontSize='xl'
+						placeholder='What should Gordon say?'
+						value={inputText}
+						onChange={(e) => setInputText(e.target.value)}
+						disabled={!!job}
+					/>
+					{renderButton()}
 				</Center>
-			</Center>
+				<Flex
+					flexDir='column'
+					alignItems='center'
+					padding={2}
+					gap={2}
+				>
+					{results.map((result, index) => (
+						<JobCard
+							key={index}
+							job={result}
+						/>
+					))}
+				</Flex>
+			</Flex>
 		</Flex>
 	)
 }
