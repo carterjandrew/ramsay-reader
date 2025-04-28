@@ -1,5 +1,5 @@
 import { Box, Center, Text } from '@chakra-ui/react'
-import { Job } from '../App'
+import { API_ENDPOINT, Job } from '../App'
 import { useEffect, useState } from 'react'
 
 export type ResultCardProps = {
@@ -10,7 +10,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ job }) => {
 	return (
 		<Center
 			flexDir='column'
-			bg='white'
+			bg='bg'
 			gap={2}
 			padding={5}
 			shadow='2xl'
@@ -26,7 +26,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ job }) => {
 			<Text>{job.text}</Text>
 			<audio controls>
 				<source
-					src={`http://localhost:5000/result/${job.id}`}
+					src={`${API_ENDPOINT}/result/${job.id}`}
 					type='audio/wav'
 				/>
 				Your browser does not support audio

@@ -1,8 +1,10 @@
-import { Box, Button, Center, Flex, Heading, Image, Input, Slider, Spinner, Text, Textarea } from "@chakra-ui/react"
+import { Box, Button, Center, createListCollection, Flex, Heading, Image, Input, Select, Slider, Spinner, Text, Textarea } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
-import { FaFastBackward, FaFastForward, FaGithub, FaPlay, FaPlayCircle } from "react-icons/fa"
-import { LuChefHat } from "react-icons/lu"
+import { FaBookOpen, FaFastBackward, FaFastForward, FaGithub, FaPlay, FaPlayCircle } from "react-icons/fa"
+import { LuChefHat, LuSpeech } from "react-icons/lu"
 import JobCard from "./components/jobCard"
+
+export const API_ENDPOINT = 'https://desktop.tail9e320.ts.net'
 
 export type Job = {
 	text: string,
@@ -19,18 +21,50 @@ export default function Page() {
 	const [job, setJob] = useState<Job>()
 	const [results, setResults] = useState<Job[]>([])
 	const intervalRef = useRef<number>(null)
+	const [genType, setGenType] = useState<'speak' | 'create' | 'url'>('speak')
+	const genTypes = createListCollection({
+		items: [
+			{ label: "Speak this text", value: 'speak' },
+			{ label: "Invent a recipe for this food", value: 'create' },
+			{ label: "Read me this online recipe", value: 'url' },
+		]
+	})
 
 	function handleBoxRef(ref: HTMLDivElement) {
 		if (!ref) return
 		setBoxHeight(ref.clientWidth)
 	}
 
+	function getEndpoint() {
+		if (genType === 'speak') return 'submit'
+		if (genType === 'create') return 'submit/recipe'
+		if (genType === 'url') return 'submit/url'
+	}
 	useEffect(() => {
 		console.log(job)
 		async function handleJobChange() {
 			if (!job) return
 			if (job.status.status === 'creating') {
-				const response = await fetch('http://localhost:5000/submit', {
+				const response = await fetch(`${API_ENDPOINT}/${getEndpoint()}`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						text: job.text
+					})
+				})
+				const id = (await response.json())[0].job_id
+				setJob({
+					...job,
+					id: id,
+					status: {
+						status: 'queued'
+					}
+				})
+			}
+			if (job.status.status === 'creating recipe') {
+				const response = await fetch(`${API_ENDPOINT}/submit/recipe`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -62,7 +96,7 @@ export default function Page() {
 	async function pollJobStatus() {
 		if (!job || !job.id) return
 		const response = await fetch(
-			`http://localhost:5000/status/${job?.id}`
+			`${API_ENDPOINT}/status/${job?.id}`
 		)
 		const status = (await response.json())
 		setJob({
@@ -88,6 +122,32 @@ export default function Page() {
 
 	}, [job])
 
+	function getPromptText() {
+		if (genType === 'speak') return 'What should Gordon say?'
+		if (genType === 'url') return 'Url to recipe:'
+		if (genType === 'create') return 'What food do you want a recipe about?'
+	}
+
+	function getButtonInside() {
+		if (genType === 'speak') return (
+			<>
+				<LuSpeech />
+				Start Speaking
+			</>
+		)
+		if (genType === 'create') return (
+			<>
+				<LuChefHat />
+				Start Cooking
+			</>
+		)
+		if (genType === 'url') return (
+			<>
+				<FaBookOpen />
+				Start Reading
+			</>
+		)
+	}
 	function renderButton() {
 		if (!job) return (
 			<Button
@@ -101,8 +161,8 @@ export default function Page() {
 					})
 				}}
 			>
-				<LuChefHat />
-				Start Cooking
+
+				{getButtonInside()}
 			</Button>
 		)
 		if (job.status.status !== 'completed') return (
@@ -175,9 +235,38 @@ export default function Page() {
 					bg='bg'
 					ref={handleBoxRef}
 				>
+					<Select.Root
+						collection={genTypes}
+						value={[genType]}
+						onValueChange={(val) => setGenType(val.value[0])}
+					>
+						<Select.HiddenSelect />
+						<Select.Label />
+
+						<Select.Control>
+							<Select.Trigger>
+								<Select.ValueText placeholder="Select option" />
+							</Select.Trigger>
+							<Select.IndicatorGroup>
+								<Select.Indicator />
+								<Select.ClearTrigger />
+							</Select.IndicatorGroup>
+						</Select.Control>
+
+						<Select.Positioner>
+							<Select.Content>
+								{genTypes.items.map((framework) => (
+									<Select.Item item={framework} key={framework.value}>
+										{framework.label}
+										<Select.ItemIndicator />
+									</Select.Item>
+								))}
+							</Select.Content>
+						</Select.Positioner>
+					</Select.Root>
 					<Textarea
 						fontSize='xl'
-						placeholder='What should Gordon say?'
+						placeholder={getPromptText()}
 						value={inputText}
 						onChange={(e) => setInputText(e.target.value)}
 						disabled={!!job}
