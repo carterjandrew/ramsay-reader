@@ -1,0 +1,7 @@
+{"time":"2025-04-14T22:24:29.209330327-06:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/carter/ramsay-reader/wandb/run-20250414_222429-yq6mhtrl/logs/debug-core.log"}
+{"time":"2025-04-14T22:24:29.422480062-06:00","level":"INFO","msg":"created new stream","id":"yq6mhtrl"}
+{"time":"2025-04-14T22:24:29.422508164-06:00","level":"INFO","msg":"stream: started","id":"yq6mhtrl"}
+{"time":"2025-04-14T22:24:29.422523152-06:00","level":"INFO","msg":"writer: Do: started","stream_id":"yq6mhtrl"}
+{"time":"2025-04-14T22:24:29.422550123-06:00","level":"INFO","msg":"handler: started","stream_id":"yq6mhtrl"}
+{"time":"2025-04-14T22:24:29.422528462-06:00","level":"INFO","msg":"sender: started","stream_id":"yq6mhtrl"}
+{"time":"2025-04-14T22:24:29.642664054-06:00","level":"INFO","msg":"Starting system monitor"}

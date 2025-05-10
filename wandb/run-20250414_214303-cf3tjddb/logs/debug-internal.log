@@ -1,0 +1,7 @@
+{"time":"2025-04-14T21:43:03.674344501-06:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/carter/ramsay-reader/wandb/run-20250414_214303-cf3tjddb/logs/debug-core.log"}
+{"time":"2025-04-14T21:43:03.900330641-06:00","level":"INFO","msg":"created new stream","id":"cf3tjddb"}
+{"time":"2025-04-14T21:43:03.900358243-06:00","level":"INFO","msg":"stream: started","id":"cf3tjddb"}
+{"time":"2025-04-14T21:43:03.900369844-06:00","level":"INFO","msg":"writer: Do: started","stream_id":"cf3tjddb"}
+{"time":"2025-04-14T21:43:03.900382819-06:00","level":"INFO","msg":"sender: started","stream_id":"cf3tjddb"}
+{"time":"2025-04-14T21:43:03.900397216-06:00","level":"INFO","msg":"handler: started","stream_id":"cf3tjddb"}
+{"time":"2025-04-14T21:43:04.111054878-06:00","level":"INFO","msg":"Starting system monitor"}

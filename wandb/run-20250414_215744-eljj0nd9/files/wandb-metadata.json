@@ -1,0 +1,76 @@
+{
+  "os": "Linux-6.14.2-arch1-1-x86_64-with-glibc2.41",
+  "python": "CPython 3.12.9",
+  "startedAt": "2025-04-15T03:57:44.746755Z",
+  "args": [
+    "--exp_name",
+    "F5TTS_Base",
+    "--learning_rate",
+    "1e-05",
+    "--batch_size_per_gpu",
+    "100",
+    "--batch_size_type",
+    "frame",
+    "--max_samples",
+    "64",
+    "--grad_accumulation_steps",
+    "1",
+    "--max_grad_norm",
+    "1",
+    "--epochs",
+    "1229",
+    "--num_warmup_updates",
+    "190",
+    "--save_per_updates",
+    "500",
+    "--keep_last_n_checkpoints",
+    "0",
+    "--last_per_updates",
+    "100",
+    "--dataset_name",
+    "gordon_ramsay_one",
+    "--finetune",
+    "--tokenizer",
+    "pinyin",
+    "--logger",
+    "wandb",
+    "--log_samples"
+  ],
+  "program": "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py",
+  "codePath": "F5-TTS/src/f5_tts/train/finetune_cli.py",
+  "git": {
+    "remote": "https://github.com/carterjandrew/ramsay-reader.git",
+    "commit": "a3ffa546eedbb457fd69cc528115f3f3d437c23e"
+  },
+  "email": "caan6785@colorado.edu",
+  "root": "/home/carter/ramsay-reader",
+  "host": "carters-desktop",
+  "executable": "/home/carter/micromamba/envs/nn/bin/python3.12",
+  "codePathLocal": "F5-TTS/src/f5_tts/train/finetune_cli.py",
+  "cpu_count": 8,
+  "cpu_count_logical": 16,
+  "gpu": "NVIDIA GeForce RTX 2070 SUPER",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "490049609728",
+      "used": "377856839680"
+    }
+  },
+  "memory": {
+    "total": "16665526272"
+  },
+  "cpu": {
+    "count": 8,
+    "countLogical": 16
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 2070 SUPER",
+      "memoryTotal": "8589934592",
+      "cudaCores": 2560,
+      "architecture": "Turing"
+    }
+  ],
+  "cudaVersion": "12.8"
+}

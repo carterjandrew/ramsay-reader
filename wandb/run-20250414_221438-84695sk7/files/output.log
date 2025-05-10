@@ -1,0 +1,19 @@
+Using logger: wandb
+Loading dataset ...
+Download Vocos from huggingface charactr/vocos-mel-24khz
+Sorting with sampler... if slow, check whether dataset is provided with duration: 100%|██████████| 3812/3812 [00:00<00:00, 2883962.27it/s]
+Creating dynamic batches with 100 audio frames per gpu: 100%|██████████| 3812/3812 [00:00<00:00, 3649551.89it/s]
+Traceback (most recent call last):
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py", line 214, in <module>
+    main()
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/train/finetune_cli.py", line 207, in main
+    trainer.train(
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/model/trainer.py", line 326, in train
+    start_update = self.load_checkpoint()
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/carter/ramsay-reader/F5-TTS/src/f5_tts/model/trainer.py", line 228, in load_checkpoint
+    self.ema_model.load_state_dict(checkpoint["ema_model_state_dict"])
+  File "/home/carter/micromamba/envs/nn/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for EMA:
+	size mismatch for ema_model.transformer.text_embed.text_embed.weight: copying a param with shape torch.Size([2546, 100]) from checkpoint, the shape in current model is torch.Size([2551, 100]).

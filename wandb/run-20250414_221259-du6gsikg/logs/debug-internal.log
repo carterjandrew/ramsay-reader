@@ -1,0 +1,15 @@
+{"time":"2025-04-14T22:12:59.112007717-06:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/carter/ramsay-reader/wandb/run-20250414_221259-du6gsikg/logs/debug-core.log"}
+{"time":"2025-04-14T22:12:59.32741878-06:00","level":"INFO","msg":"created new stream","id":"du6gsikg"}
+{"time":"2025-04-14T22:12:59.327448125-06:00","level":"INFO","msg":"stream: started","id":"du6gsikg"}
+{"time":"2025-04-14T22:12:59.327457753-06:00","level":"INFO","msg":"writer: Do: started","stream_id":"du6gsikg"}
+{"time":"2025-04-14T22:12:59.32746715-06:00","level":"INFO","msg":"sender: started","stream_id":"du6gsikg"}
+{"time":"2025-04-14T22:12:59.327478421-06:00","level":"INFO","msg":"handler: started","stream_id":"du6gsikg"}
+{"time":"2025-04-14T22:12:59.647743363-06:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-14T22:13:02.878668506-06:00","level":"INFO","msg":"stream: closing","id":"du6gsikg"}
+{"time":"2025-04-14T22:13:02.878695557-06:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-14T22:13:02.878751992-06:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-14T22:13:03.327052488-06:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-14T22:13:03.475390843-06:00","level":"INFO","msg":"handler: closed","stream_id":"du6gsikg"}
+{"time":"2025-04-14T22:13:03.475429776-06:00","level":"INFO","msg":"sender: closed","stream_id":"du6gsikg"}
+{"time":"2025-04-14T22:13:03.475422071-06:00","level":"INFO","msg":"writer: Close: closed","stream_id":"du6gsikg"}
+{"time":"2025-04-14T22:13:03.475476743-06:00","level":"INFO","msg":"stream: closed","id":"du6gsikg"}

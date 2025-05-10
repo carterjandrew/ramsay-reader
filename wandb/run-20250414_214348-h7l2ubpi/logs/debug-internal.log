@@ -1,0 +1,15 @@
+{"time":"2025-04-14T21:43:48.542878332-06:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/carter/ramsay-reader/wandb/run-20250414_214348-h7l2ubpi/logs/debug-core.log"}
+{"time":"2025-04-14T21:43:48.759113501-06:00","level":"INFO","msg":"created new stream","id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:48.759144368-06:00","level":"INFO","msg":"stream: started","id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:48.759151171-06:00","level":"INFO","msg":"writer: Do: started","stream_id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:48.759167782-06:00","level":"INFO","msg":"handler: started","stream_id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:48.759181899-06:00","level":"INFO","msg":"sender: started","stream_id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:48.966600388-06:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-14T21:43:52.276997367-06:00","level":"INFO","msg":"stream: closing","id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:52.277018476-06:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-14T21:43:52.277069231-06:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-14T21:43:52.598920201-06:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-14T21:43:52.745477841-06:00","level":"INFO","msg":"handler: closed","stream_id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:52.745499732-06:00","level":"INFO","msg":"writer: Close: closed","stream_id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:52.74553076-06:00","level":"INFO","msg":"sender: closed","stream_id":"h7l2ubpi"}
+{"time":"2025-04-14T21:43:52.745539606-06:00","level":"INFO","msg":"stream: closed","id":"h7l2ubpi"}
